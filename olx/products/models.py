@@ -8,12 +8,13 @@ class Owner(models.Model):
     rollNo = models.CharField(blank = False, null=False)
     phoneNo = models.CharField(max_length=13)
     rating = models.FloatField(blank = True)
-    profilePicture = models.ImageField(blank = True, null = True, on_delete = models.CASCADE)
+    profilePicture = models.ImageField(blank = True, null = True)
     def __str__(self):
         return self.name
 
 class Product(models.Model):
     name = models.CharField(max_length=120, blank = False, null=False)
+    company = models.CharField(max_length=120, blank = True)
     price = models.IntegerField(blank = False, null=False)
     description = models.TextField(blank=True, null=True)
     quantity = models.IntegerField(blank = False, null=False)
@@ -31,11 +32,11 @@ class Product(models.Model):
 
 
 class Image(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,related_name="Images")
     images = models.ImageField(blank=True, null=True, upload_to=f'images')
     def __str__(self):
         return self.product.name + " Image"
-    
+
     @property
     def ImageURL(self):
         try:
