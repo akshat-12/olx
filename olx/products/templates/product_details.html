@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block body_block %}
+{% for img in prod.Images.all %}
+    <img src= "{{ img.images.url }}" />
+{% endfor %}
+    <p>{{ prod.price }}</p>
+    <p>{{ prod.name }}</p>
+    <p>{{ prod.description }}</p>
+    <p>{{ prod.lastModified }}</p>
+{% endblock %}

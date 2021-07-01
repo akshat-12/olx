@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block body_block %}
+{% for prod in product_list %}
+    <a href = "{% url "products:details" prod.pk %}">
+        <img src= "{{ prod.Images.all.0.images.url }}" />
+        <p>{{ prod.price }}</p>
+        <p>{{ prod.name }}</p>
+        <p>{{ prod.company }}</p>
+        <p>{{ prod.lastModified }}</p>
+    </a>
+{% endfor %}
+{% endblock %}
