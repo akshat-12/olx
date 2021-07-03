@@ -36,12 +36,14 @@ class Image(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE,related_name="Images")
     images = models.ImageField(blank=True, null=True, upload_to=f'images')
     def __str__(self):
-        return self.product.name + " Image"
+        return self.images.name
 
     @property
     def ImageURL(self):
         try:
             url = self.image.url
+            if url=='':
+                url='images/default.jpeg'
         except:
             url = ''
         return url

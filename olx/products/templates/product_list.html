@@ -2,7 +2,11 @@
 {% block body_block %}
 {% for prod in product_list %}
     <a href = "{% url "products:details" prod.pk %}">
-        <img src= "{{ prod.Images.all.0.images.url }}" />
+        {% if prod.Images.all.0.images.url != '' %}
+            <img src= "{{ prod.Images.all.0.images.url }}" />
+        {% else %}
+            <img src= "uploads/images/default.jpeg" />
+        {% endif %}
         <p>{{ prod.price }}</p>
         <p>{{ prod.name }}</p>
         <p>{{ prod.company }}</p>
