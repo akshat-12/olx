@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% block body_block %}
 {% for img in prod.Images.all %}
-    <img src= "{{ img.images.url }}" />
+        {% if prod.Images.all.0.images.url != '' %}
+            <img src= "{{ img.images.url }}" />
+        {% else %}
+            <img src= "/uploads/images/default.jpeg" />
+        {% endif %}
 {% endfor %}
     <p>{{ prod.price }}</p>
     <p>{{ prod.name }}</p>
