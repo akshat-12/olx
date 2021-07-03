@@ -127,9 +127,6 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads/')
-<<<<<<< HEAD
 
-AUTHENTICATION_BACKENDS = ('appname.filename.EmailBackend',)
-=======
+AUTHENTICATION_BACKENDS = ('products.models.EmailBackend',)
 MEDIA_URL = '/uploads/'
->>>>>>> d07493516fba224c95e9e620a69e438ce96dd1e3

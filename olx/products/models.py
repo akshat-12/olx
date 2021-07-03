@@ -1,4 +1,3 @@
-from typing_extensions import Required
 from django.db import models
 from django.db.models.base import Model
 from django.db.models import Q
@@ -7,9 +6,9 @@ from django.contrib.auth.backends import ModelBackend, UserModel
 class Owner(models.Model):
     name = models.CharField(blank = False, max_length=120,null=False)
     email = models.EmailField(blank = False, null=False)
-    rollNo = models.CharField(blank = False, null=False)
+    rollNo = models.CharField(max_length=9, blank = False, null=False)
     phoneNo = models.CharField(max_length=13)
-    rating = models.FloatField(blank = True)
+    rating = models.FloatField(blank = True, default=0.0)
     profilePicture = models.ImageField(blank = True, null = True)
     def __str__(self):
         return self.name
@@ -46,7 +45,6 @@ class Image(models.Model):
         except:
             url = ''
         return url
-<<<<<<< HEAD
 
 
 class EmailBackend(ModelBackend):
@@ -55,8 +53,8 @@ class EmailBackend(ModelBackend):
             user = UserModel.objects.get(Q(username__iexact=username) | Q(email__iexact=username))
         except UserModel.DoesNotExist:
             UserModel().set_password(password)
-        except MultipleObjectsReturned:
-            return User.objects.filter(email=username).order_by('id').first()
+        except UserModel.MultipleObjectsReturned:
+            return UserModel.objects.filter(email=username).order_by('id').first()
         else:
             if user.check_password(password) and self.user_can_authenticate(user):
                 return user
@@ -70,5 +68,3 @@ class EmailBackend(ModelBackend):
         return user if self.user_can_authenticate(user) else None
 
 
-=======
->>>>>>> d07493516fba224c95e9e620a69e438ce96dd1e3
